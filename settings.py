@@ -178,16 +178,6 @@ dict(
 
 
 
-
-    #
-    #
-    # dict(
-    #     name='cpr_partial_free',
-    #     display_name='CPR game partial out-put sharing (free)',
-    #     num_demo_participants=4,
-    #     app_sequence=['cpr_partial_free'],
-    # ),
-
 ]
 
 # if you set a property in SESSION_CONFIG_DEFAULTS, it will be inherited by all configs
@@ -197,8 +187,8 @@ dict(
 
 #Use points in the rounds and exchange rate is 1 points = $0.0025
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.0025,
-    participation_fee=3.00,
+    real_world_currency_per_point=0.0033,
+    participation_fee=5.00,
     doc=""
 )
 
@@ -224,15 +214,17 @@ ROOMS = [
     ),
 
     dict(
-        name = 'ECON9940_pilot_25April',
-        display_name = 'ECON9940_pilot_25April',
-        participant_label_file = '_rooms/ECON9940_pilot_25April.txt',
+        name = 'cpr_psharing_fall2024',
+        display_name = 'CPR_psharing_Fall2024',
+        participant_label_file = '_rooms/CPR_psharing_Fall2024.txt',
     ),
 ]
+
 
 ADMIN_USERNAME = 'admin'
 # for security, best to set admin password in an environment variable
 ADMIN_PASSWORD = environ.get('OTREE_ADMIN_PASSWORD')
+
 
 DEMO_PAGE_INTRO_HTML = """
 Here are some oTree games.
