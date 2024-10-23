@@ -108,40 +108,7 @@ def set_payoffs(g: Group):
         p.others_avg_effort_act_b = round((group_total_effort - individual_effort) / (Constants.players_per_group - 1),
                                           1)
 
-# Old version
-# def set_payoffs(g: Group):
-#     #setup group total harvest
-#     g.total_effort_act2 = 0
-#
-#     for p in g.get_players():
-#         #Total harvest
-#         g.total_effort_act2 += p.effort_act2
-#
-#     #Earnings for each round
-#     for p in g.get_players():
-#         print('Endowment', Constants.endowment)
-#         print('Effort spent in Activity 2', p.effort_act2)
-#         print('Group Total effort spent in Activity 2', g.total_effort_act2)
-#
-#         p.period_payoff = float(5*Constants.endowment - 5*p.effort_act2 + 20*p.effort_act2 - 0.1171*g.total_effort_act2*p.effort_act2)
-#         print('payoff', p.period_payoff)
-#
-#         p.period_payoff_int = round(p.period_payoff)
-#
-#         #Cumulative earnings for each participant
-#         p.participant.vars['totalEarnings_a'] += p.period_payoff_int
-#         print('total earnings', p.participant.vars['totalEarnings_a'])
-#
-#         #storing history of cumulative earnings
-#         p.history_accumulated_earnings = p.participant.vars['totalEarnings_a']
-#         print('accumulated earnings tracking', p.history_accumulated_earnings )
-#
-#         #Cash amount
-#         p.participant.vars['totalCash_a'] = round(p.participant.vars['totalEarnings_a'] * Constants.conversion, 2)
-#
-#     #others effort in activity 2 (extract cpr)
-#     for p in g.get_players():
-#         p.others_effort_act2 = g.total_effort_act2 - p.effort_act2
+
 
 # Admin report
 def vars_for_admin_report(subsession):

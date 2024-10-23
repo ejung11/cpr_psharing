@@ -35,12 +35,86 @@ SESSION_CONFIGS = [
                           ],
         ),
 
+dict(
+        name='Test_session_AC',
+        display_name='Test session AC',
+        num_demo_participants=8,
+        app_sequence=[
+                'consent',
+                'instructions_general',
+                'intro_baseline',
+                'cpr_partial_baseline_p',
+                'cpr_partial_baseline',
+                'intro_tr30',
+                'cpr_partial_30_p',
+                'cpr_partial_30',
+                'post_survey',
+                          ],
+        ),
 
-    dict(
+dict(
+        name='consent',
+        display_name='consent',
+        num_demo_participants=2,
+        app_sequence=['consent'],
+    ),
+
+dict(
+        name='instructions',
+        display_name='General Instructions',
+        num_demo_participants=1,
+        app_sequence=[
+            'instructions_general',
+                      ],
+    ),
+
+dict(
+        name='intro_baseline',
+        display_name='baseline_intro',
+        num_demo_participants=1,
+        app_sequence=['intro_baseline'],
+    ),
+
+dict(
+        name='intro_baseline_2',
+        display_name='baseline_intro_2',
+        num_demo_participants=1,
+        app_sequence=['intro_baseline_2'],
+    ),
+
+dict(
+        name='intro_tr60',
+        display_name='Tr60_intro',
+        num_demo_participants=1,
+        app_sequence=['intro_tr60'],
+    ),
+
+dict(
+        name='intro_tr30',
+        display_name='Tr30_intro',
+        num_demo_participants=1,
+        app_sequence=['intro_tr30'],
+    ),
+
+dict(
         name='cpr_partial_baseline',
         display_name='CPR game partial out-put sharing (baseline)',
         num_demo_participants=8,
         app_sequence=['cpr_partial_baseline'],
+    ),
+
+dict(
+        name='cpr_partial_baseline_p',
+        display_name='CPR game partial out-put sharing (baseline) Practice',
+        num_demo_participants=2,
+        app_sequence=['cpr_partial_baseline_p'],
+    ),
+
+dict(
+        name='cpr_partial_baseline_2',
+        display_name='CPR baseline 2',
+        num_demo_participants=8,
+        app_sequence=['cpr_partial_baseline_2'],
     ),
 
 dict(
@@ -67,41 +141,28 @@ dict(
                       ],
     ),
 
-
 dict(
-        name='cpr_partial_baseline_p',
-        display_name='CPR game partial out-put sharing (baseline) Practice',
-        num_demo_participants=2,
-        app_sequence=['cpr_partial_baseline_p'],
-    ),
-
-
-dict(
-        name='intro_baseline',
-        display_name='baseline_intro',
-        num_demo_participants=1,
-        app_sequence=['intro_baseline'],
-    ),
-
-dict(
-        name='intro_baseline_2',
-        display_name='baseline_intro_2',
-        num_demo_participants=1,
-        app_sequence=['intro_baseline_2'],
-    ),
-
-dict(
-        name='intro_tr60',
-        display_name='Tr60_intro',
-        num_demo_participants=1,
-        app_sequence=['intro_tr60'],
-    ),
-
-dict(
-        name='cpr_partial_baseline_2',
-        display_name='CPR baseline 2',
+        name='cpr_partial_30',
+        display_name='CPR game partial out-put sharing (Low Treatment)',
         num_demo_participants=8,
-        app_sequence=['cpr_partial_baseline_2'],
+        app_sequence=['cpr_partial_30'],
+    ),
+
+dict(
+        name='cpr_partial_30_p',
+        display_name='CPR game partial out-put sharing (Low Treatment) Practice',
+        num_demo_participants=2,
+        app_sequence=['cpr_partial_30_p'],
+    ),
+
+dict(
+        name='test_tr30_sequence',
+        display_name='CPR game partial out-put sharing (Low Treatment) All sequence',
+        num_demo_participants=8,
+        app_sequence=['intro_tr30',
+                      'cpr_partial_30_p',
+                      'cpr_partial_30',
+                      ],
     ),
 
     dict(
@@ -111,21 +172,7 @@ dict(
         app_sequence=['post_survey'],
     ),
 
-dict(
-        name='consent',
-        display_name='consent',
-        num_demo_participants=2,
-        app_sequence=['consent'],
-    ),
 
-dict(
-        name='instructions',
-        display_name='General Instructions',
-        num_demo_participants=1,
-        app_sequence=[
-            'instructions_general',
-                      ],
-    ),
 
 
 

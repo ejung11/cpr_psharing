@@ -2,18 +2,18 @@ from otree.api import *
 
 
 doc = """
-This is the Practice app for Part 2 High Treatment (Tr60) of 
+This is the Practice app for Part 2 Low Treatment (Tr30) of 
 the project "Managing the Tragedy of the Commons: A Partial Output-Sharing Approach"
 This will include practice, Harvest, Results.
 """
 
 class Constants(BaseConstants):
-    name_in_url = 'cpr_partial_60_practice'
+    name_in_url = 'cpr_partial_30_practice'
     players_per_group = None
     num_rounds = 3
-    instructions_template = 'cpr_partial_60_p/rules.html'
+    instructions_template = 'cpr_partial_30_p/rules.html'
     endowment = 25
-    share = 0.6
+    share = 0.3
     conversion = 0.0025
     fixed_others_effort_1 = 70
     fixed_others_effort_2 = 140

@@ -12,18 +12,20 @@ from otree.api import (
 )
 
 doc = """
-This is the Decision app for Part 1 Baseline of 
+This is the Decision app for Part 2 Low Treatment (Tr30) of 
 the project "Managing the Tragedy of the Commons: A Partial Output-Sharing Approach"
 This will include practice, Harvest, Results, PaymentInfo, rules.
 """
 
+
 class Constants(BaseConstants):
-    name_in_url = 'cpr_baseline'
+    name_in_url = 'cpr_tr30'
     players_per_group = 8
     num_rounds = 10
-    instructions_template = 'cpr_partial_baseline/rules.html'
+    instructions_template = 'cpr_partial_30/rules.html'
     endowment = 25
     conversion = 0.0025
+    share = 0.3
 
 
 class Subsession(BaseSubsession):
@@ -32,7 +34,6 @@ class Subsession(BaseSubsession):
 
 class Group(BaseGroup):
     total_effort_act_b = models.IntegerField()
-
 
 
 class Player(BasePlayer):
@@ -60,6 +61,8 @@ class Player(BasePlayer):
     period_earning_a_int = models.IntegerField()
     period_earning_b = models.FloatField()
     period_earning_b_int = models.IntegerField()
+    period_earning_group = models.FloatField()
+    period_earning_group_int = models.IntegerField()
 
 
 #FUNCTIONS
@@ -77,7 +80,10 @@ def creating_session(subsession):
     #set individual var: total earnings for each participant
     for p in subsession.get_players():
         if subsession.round_number == 1:
-            p.participant.vars['totalEarnings_a'] = 0
+            p.participant.vars['totalEarnings_b'] = 0
+
+            # Comment out after testing
+            #p.participant.vars['totalEarnings_a'] = 0
 
 #Payoffs
 def set_payoffs(g: Group):
@@ -90,11 +96,13 @@ def set_payoffs(g: Group):
         # Logically break down the payoff calculation
         base_endowment_value = 5 * Constants.endowment
         individual_extraction = 20 * individual_effort
+        group_extraction = 20 * group_total_effort
+        group_externality_cost = 0.1171 * group_total_effort * group_total_effort
         externality_cost = 0.1171 * group_total_effort * individual_effort
 
         earning_act_a = base_endowment_value - (5 * individual_effort)
-        earning_act_b = individual_extraction - externality_cost
-
+        earning_act_b = (1 - Constants.share) * (individual_extraction - externality_cost)
+        earning_group = (Constants.share/Constants.players_per_group) * (group_extraction - group_externality_cost)
 
         p.period_earning_a = float(earning_act_a)
         p.period_earning_a_int = round(p.period_earning_a)
@@ -102,66 +110,43 @@ def set_payoffs(g: Group):
         p.period_earning_b = float(earning_act_b)
         p.period_earning_b_int = round(p.period_earning_b)
 
-        p.period_payoff = float(earning_act_a +
-                                earning_act_b
+        p.period_earning_group = float(earning_group)
+        p.period_earning_group_int = round(p.period_earning_group)
+
+        p.period_payoff = float( earning_act_a +
+                                 earning_act_b +
+                                 earning_group
                                 )
+
         p.period_payoff_int = round(p.period_payoff)
 
-        p.participant.vars['totalEarnings_a'] += p.period_payoff_int
-        p.history_accumulated_earnings = p.participant.vars['totalEarnings_a']
-        p.participant.vars['totalCash_a'] = round(p.participant.vars['totalEarnings_a'] * Constants.conversion, 2)
+
+
+
+        p.participant.vars['totalEarnings_b'] += p.period_payoff_int
+        p.history_accumulated_earnings = p.participant.vars['totalEarnings_b']
+
+        p.participant.vars['totalEarnings'] = p.participant.vars['totalEarnings_a'] + p.participant.vars['totalEarnings_b']
+        p.participant.vars['totalCash'] = round(p.participant.vars['totalEarnings'] * Constants.conversion, 2)
+        p.participant.vars['finalCash'] = p.participant.vars['totalCash'] + 3
 
         # Log effort of others
         p.others_effort_act_b = group_total_effort - individual_effort
-        p.others_avg_effort_act_b = round((group_total_effort - individual_effort) / (Constants.players_per_group - 1),
-                                          1)
-
-# Old version
-# def set_payoffs(g: Group):
-#     #setup group total harvest
-#     g.total_effort_act2 = 0
-#
-#     for p in g.get_players():
-#         #Total harvest
-#         g.total_effort_act2 += p.effort_act2
-#
-#     #Earnings for each round
-#     for p in g.get_players():
-#         print('Endowment', Constants.endowment)
-#         print('Effort spent in Activity 2', p.effort_act2)
-#         print('Group Total effort spent in Activity 2', g.total_effort_act2)
-#
-#         p.period_payoff = float(5*Constants.endowment - 5*p.effort_act2 + 20*p.effort_act2 - 0.1171*g.total_effort_act2*p.effort_act2)
-#         print('payoff', p.period_payoff)
-#
-#         p.period_payoff_int = round(p.period_payoff)
-#
-#         #Cumulative earnings for each participant
-#         p.participant.vars['totalEarnings_a'] += p.period_payoff_int
-#         print('total earnings', p.participant.vars['totalEarnings_a'])
-#
-#         #storing history of cumulative earnings
-#         p.history_accumulated_earnings = p.participant.vars['totalEarnings_a']
-#         print('accumulated earnings tracking', p.history_accumulated_earnings )
-#
-#         #Cash amount
-#         p.participant.vars['totalCash_a'] = round(p.participant.vars['totalEarnings_a'] * Constants.conversion, 2)
-#
-#     #others effort in activity 2 (extract cpr)
-#     for p in g.get_players():
-#         p.others_effort_act2 = g.total_effort_act2 - p.effort_act2
+        p.others_avg_effort_act_b =round((group_total_effort - individual_effort) / (Constants.players_per_group - 1),1)
 
 
-# Old version
-# def vars_for_admin_report(subsession):
-#     info = []
-#     for p in subsession.get_players():
-#         if p.participant.label is not None:
-#             total_earnings = 0
-#             for i in p.in_all_rounds():
-#                 total_earnings += i.period_payoff_int
-#             paymentInfo.append(p.participant.label, total_earnings)
-#     return dict(info=info)
+# Admin report
+def vars_for_admin_report(subsession):
+    info = []
+    for p in subsession.get_players():
+        if p.participant.label is not None:
+            total_earnings = 0
+            for i in p.in_all_rounds():
+                total_earnings += i.period_payoff_int
+            info.append((p.participant.label, total_earnings))  # Corrected
+    return dict(info=info)
+
+
 
 
 # PAGES

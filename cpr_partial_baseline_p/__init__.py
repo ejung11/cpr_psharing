@@ -96,39 +96,6 @@ def set_payoffs(player: Player):
     player.period_payoff_int = round(player.period_payoff)
 
 
-#Payoffs
-# def set_payoffs(g: Group):
-#     for p in g.get_players():
-#         # Assign different values based on the round number
-#         if g.round_number == 1:
-#             g.total_effort_act_b = Constants.fixed_others_effort_1 + p.effort_act_b
-#         elif g.round_number == 2:
-#             g.total_effort_act_b = Constants.fixed_others_effort_2 + p.effort_act_b
-#         elif g.round_number == 3:
-#             g.total_effort_act_b = Constants.fixed_others_effort_3 + p.effort_act_b
-#
-#         if g.round_number == 1:
-#             p.others_effort_act_b = Constants.fixed_others_effort_1
-#         elif g.round_number == 2:
-#             p.others_effort_act_b = Constants.fixed_others_effort_2
-#         elif g.round_number == 3:
-#             p.others_effort_act_b = Constants.fixed_others_effort_3
-#
-#     for p in g.get_players():
-#         individual_effort = p.effort_act_b
-#         group_total_effort = g.total_effort_act_b
-#
-#         # Logically break down the payoff calculation
-#         base_endowment_value = 5 * Constants.endowment
-#         individual_contribution = 20 * individual_effort
-#         externality_cost = 0.1171 * group_total_effort * individual_effort
-#
-#         p.period_payoff = float(base_endowment_value - 5 * individual_effort + individual_contribution - externality_cost)
-#         p.period_payoff_int = round(p.period_payoff)
-
-        # Log effort of others
-        #p.others_effort_act_b = g.total_effort_act_b - p.effort_act_b
-
 
 
 

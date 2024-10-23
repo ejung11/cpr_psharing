@@ -82,6 +82,9 @@ def creating_session(subsession):
         if subsession.round_number == 1:
             p.participant.vars['totalEarnings_b'] = 0
 
+            # Comment out after testing
+            # p.participant.vars['totalEarnings_a'] = 0
+
 #Payoffs
 def set_payoffs(g: Group):
     g.total_effort_act_b = sum([p.effort_act_b for p in g.get_players()])
@@ -140,46 +143,6 @@ def vars_for_admin_report(subsession):
                 total_earnings += i.period_payoff_int
             info.append((p.participant.label, total_earnings))  # Corrected
     return dict(info=info)
-
-
-# ------------------------------ Old Version ------------------------------
-#Payoffs
-# def set_payoffs(g: Group):
-#     #setup group total harvest
-#     g.total_harvest = 0
-#
-#     for p in g.get_players():
-#         #Total harvest
-#         g.total_harvest += p.harvest
-#
-#     #Earnings for each round
-#     for p in g.get_players():
-#         print('endowment', Constants.endowment)
-#         print('harvest', p.harvest)
-#         print('total harvest', g.total_harvest)
-#
-#         p.period_payoff = float(5*(Constants.endowment - p.harvest)
-#                                 + (1-Constants.share)*(23*p.harvest - 0.25*g.total_harvest*p.harvest)
-#                                 + (Constants.share / Constants.players_per_group)*((23 - 0.25*g.total_harvest)*g.total_harvest)
-#                                 )
-#         print('payoff', p.period_payoff)
-#         p.period_payoff_int = round(p.period_payoff)
-#
-#         #Cumulative earnings for each participant
-#         p.participant.vars['totalEarnings_b'] += p.period_payoff_int
-#         print('total earnings', p.participant.vars['totalEarnings_b'])
-#
-#         #storing history of cumulative earnings
-#         p.history_accumulated_earnings = p.participant.vars['totalEarnings_b']
-#         print('accumulated earnings tracking', p.history_accumulated_earnings )
-#
-#         #Cash amount
-#         p.participant.vars['totalCash_b'] = round(p.participant.vars['totalEarnings_b'] * Constants.conversion, 2)
-#
-#     #others harvest
-#     for p in g.get_players():
-#         p.others_harvest = g.total_harvest - p.harvest
-
 
 
 
