@@ -10,7 +10,7 @@ This will include Demographics, Decision, and Big 5 personality traits pages.
 
 
 class Constants(BaseConstants):
-    name_in_url = 'post-survey'
+    name_in_url = 'post-survey_baseline'
     players_per_group = None
     num_rounds = 1
     StandardChoices = [
@@ -33,13 +33,14 @@ class Group(BaseGroup):
 
 
 class Player(BasePlayer):
-    # record payoffs
+    #record payoffs
     total_earning_part1 = models.IntegerField()
     total_earning_part2 = models.IntegerField()
     total_earning = models.IntegerField()
     total_cash_b4round = models.FloatField()
     total_cash = models.FloatField()
     final_cash = models.FloatField()
+
 
     # Demographics
     age = models.IntegerField(label='Q1) How old are you?', min=13, max=125)
@@ -185,29 +186,29 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
     )
 
-    sharing_clear = models.IntegerField(
-        label="Q6) It was clear from the instructions how my earnings will be affected by sharing arrangements.",
-        choices=[
-            [1, 'Strongly Disagree'],
-            [2, 'Disagree'],
-            [3, 'Neutral'],
-            [4, 'Agree'],
-            [5, 'Strongly Agree'],
-        ],
-        widget=widgets.RadioSelectHorizontal,
-    )
-
-    sharing_impact = models.IntegerField(
-        label="Q7) Sharing arrangements influenced my decisions.",
-        choices=[
-            [1, 'Strongly Disagree'],
-            [2, 'Disagree'],
-            [3, 'Neutral'],
-            [4, 'Agree'],
-            [5, 'Strongly Agree'],
-        ],
-        widget=widgets.RadioSelectHorizontal,
-    )
+    # sharing_clear = models.IntegerField(
+    #     label="Q6) It was clear from the instructions how my earnings will be affected by sharing arrangements.",
+    #     choices=[
+    #         [1, 'Strongly Disagree'],
+    #         [2, 'Disagree'],
+    #         [3, 'Neutral'],
+    #         [4, 'Agree'],
+    #         [5, 'Strongly Agree'],
+    #     ],
+    #     widget=widgets.RadioSelectHorizontal,
+    # )
+    #
+    # sharing_impact = models.IntegerField(
+    #     label="Q7) Sharing arrangements influenced my decisions.",
+    #     choices=[
+    #         [1, 'Strongly Disagree'],
+    #         [2, 'Disagree'],
+    #         [3, 'Neutral'],
+    #         [4, 'Agree'],
+    #         [5, 'Strongly Agree'],
+    #     ],
+    #     widget=widgets.RadioSelectHorizontal,
+    # )
 
 
     # Big 5 personality traits using Ten-Item Personality Inventory-(TIPI) Gosling et al. (2003)
@@ -271,17 +272,19 @@ class Player(BasePlayer):
         # widget=widgets.RadioSelectHorizontal,
     )
 
+
 # Calculate Payoffs
 def final_payoffs(p: Player):
     p.total_earning_part1 = p.participant.vars['totalEarnings_a']
     p.total_earning_part2 = p.participant.vars['totalEarnings_b']
     p.total_earning = p.participant.vars['totalEarnings']
     p.total_cash_b4round = p.participant.vars['totalCash']
-    p.total_cash = (math.ceil(p.total_cash_b4round * 4)) / 4
+    p.total_cash = (math.ceil(p.total_cash_b4round * 4))/4
     p.final_cash = p.total_cash + 5
 
-# PAGES
 
+
+# PAGES
 class IntroPage(Page):
 
     def before_next_page(player: Player, timeout_happened):
@@ -308,8 +311,6 @@ class Decisions(Page):
         'tools_clear',
         'tools_helpful',
         'tools_belief',
-        'sharing_clear',
-        'sharing_impact',
     ]
 
 
@@ -331,6 +332,11 @@ class Big5(Page):
 
 class EndPage(Page):
     pass
+
+    # def vars_for_template(player: Player):
+    #     # Convert payoff to USD. Assuming the payoff is stored in a 'payoff' attribute.
+    #     usd_payoff = player.payoff.to_real_world_currency(player.session)
+    #     return dict(usd_payoff=usd_payoff)
 
 page_sequence = [
     IntroPage,

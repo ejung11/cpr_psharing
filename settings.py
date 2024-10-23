@@ -3,8 +3,8 @@ from os import environ
 
 SESSION_CONFIGS = [
     dict(
-        name='Test_session_AA',
-        display_name='Test session AA',
+        name='Session_AA',
+        display_name='Session AA',
         num_demo_participants=8,
         app_sequence=[
                 'consent',
@@ -14,13 +14,13 @@ SESSION_CONFIGS = [
                 'cpr_partial_baseline',
                 'intro_baseline_2',
                 'cpr_partial_baseline_2',
-                'post_survey',
+                'post_survey_baseline',
                           ],
         ),
 
     dict(
-        name='Test_session_AB',
-        display_name='Test session AB',
+        name='Session_AB',
+        display_name='Session AB',
         num_demo_participants=8,
         app_sequence=[
                 'consent',
@@ -36,8 +36,8 @@ SESSION_CONFIGS = [
         ),
 
 dict(
-        name='Test_session_AC',
-        display_name='Test session AC',
+        name='Session_AC',
+        display_name='Session AC',
         num_demo_participants=8,
         app_sequence=[
                 'consent',
@@ -132,7 +132,7 @@ dict(
     ),
 
 dict(
-        name='test_tr60_sequence',
+        name='tr60_sequence',
         display_name='CPR game partial out-put sharing (High Treatment) All sequence',
         num_demo_participants=8,
         app_sequence=['intro_tr60',
@@ -156,7 +156,7 @@ dict(
     ),
 
 dict(
-        name='test_tr30_sequence',
+        name='tr30_sequence',
         display_name='CPR game partial out-put sharing (Low Treatment) All sequence',
         num_demo_participants=8,
         app_sequence=['intro_tr30',
@@ -185,7 +185,7 @@ dict(
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
-#Use points in the rounds and exchange rate is 1 points = $0.0025
+#Use points in the rounds and exchange rate is 1 points = $0.0033
 SESSION_CONFIG_DEFAULTS = dict(
     real_world_currency_per_point=0.0033,
     participation_fee=5.00,

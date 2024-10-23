@@ -110,27 +110,6 @@ def set_payoffs(g: Group):
 
 
 
-# Admin report
-def vars_for_admin_report(subsession):
-    info = []
-    for p in subsession.get_players():
-        if p.participant.label is not None:
-            total_earnings = 0
-            for i in p.in_all_rounds():
-                total_earnings += i.period_payoff_int
-            info.append((p.participant.label, total_earnings))  # Corrected
-    return dict(info=info)
-
-# Old version
-# def vars_for_admin_report(subsession):
-#     info = []
-#     for p in subsession.get_players():
-#         if p.participant.label is not None:
-#             total_earnings = 0
-#             for i in p.in_all_rounds():
-#                 total_earnings += i.period_payoff_int
-#             paymentInfo.append(p.participant.label, total_earnings)
-#     return dict(info=info)
 
 
 # PAGES
