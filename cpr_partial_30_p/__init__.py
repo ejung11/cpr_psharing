@@ -14,7 +14,7 @@ class Constants(BaseConstants):
     instructions_template = 'cpr_partial_30_p/rules.html'
     endowment = 25
     share = 0.3
-    conversion = 0.0025
+    conversion = 0.0033
     fixed_others_effort_1 = 70
     fixed_others_effort_2 = 140
     fixed_others_effort_3 = 56
