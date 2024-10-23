@@ -148,10 +148,10 @@ dict(
 # the session config can be accessed from methods in your apps as self.session.config,
 # e.g. self.session.config['participation_fee']
 
-#Use points in the rounds and exchange rate is 1 points = $0.01
+#Use points in the rounds and exchange rate is 1 points = $0.0025
 SESSION_CONFIG_DEFAULTS = dict(
-    real_world_currency_per_point=0.01,
-    participation_fee=0.00,
+    real_world_currency_per_point=0.0025,
+    participation_fee=3.00,
     doc=""
 )
 
@@ -160,11 +160,11 @@ SESSION_CONFIG_DEFAULTS = dict(
 LANGUAGE_CODE = 'en'
 
 # e.g. EUR, GBP, CNY, JPY
-REAL_WORLD_CURRENCY_CODE = 'USD'
-#USE_POINTS = True
-#Changing points to tokens
-#POINTS_CUSTOM_NAME = 'tokens'
-#POINTS_DECIMAL_PLACES = 2
+# REAL_WORLD_CURRENCY_CODE = 'USD'
+# USE_POINTS = True
+# Changing points to ECUs
+# POINTS_CUSTOM_NAME = 'ECUs'
+# POINTS_DECIMAL_PLACES = 0
 
 ROOMS = [
     dict(name='live_demo', display_name='Room for live demo (no participant labels)'),
