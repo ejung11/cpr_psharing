@@ -1,0 +1,33 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{{ block style }}
+   <link rel="stylesheet" type="text/css" href="{{ static 'global/global_styles.css' }}"/>
+    <style>
+       h5 {
+           text-decoration: underline;
+       }
+   </style>
+{{ endblock }}
+
+{% block title %}
+<div class="narrow-body">
+    Part 1: Instructions
+</div>    
+{% endblock %}
+
+{% block content %}
+<div class="narrow-body">
+    <div class="panel panel-default" style="margin-bottom:10px">
+        <div class="panel-body">
+
+            <p>You just finished reading the instructions.</p>
+
+            <p>Please wait for everyone to complete.</p>
+
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

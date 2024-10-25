@@ -1,0 +1,36 @@
+{% extends "global/Page.html" %}
+{% load static %}
+
+{{ block style }}
+   <link rel="stylesheet" type="text/css" href="{{ static 'global/global_styles.css' }}"/>
+    <style>
+       h5 {
+           text-decoration: underline;
+       }
+   </style>
+{{ endblock }}
+
+
+{% block title %}
+<div class="narrow-body">
+    Part 2: Practice
+</div>
+{% endblock %}
+
+{{ block content }}
+
+
+<div class="narrow-body">
+
+    <div class="instructions-subheading">3 Practice Rounds</div>
+
+    <p>
+        You will play 3 practice rounds with 7 computerized players.
+    </p>
+
+    {{ next_button }}
+
+</div>
+
+
+{{ endblock }}

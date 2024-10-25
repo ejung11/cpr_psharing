@@ -89,6 +89,10 @@ class Instructions(Page):
     pass
 
 
+class Wait(Page):
+    pass
+
+
 
 class KnowledgeCheck(Page):
     form_model = 'player'
@@ -134,7 +138,13 @@ class KnowledgeCheck(Page):
         return final_errors
 
 
+class BeforePractice(Page):
+    pass
+
+
 page_sequence = [
     Instructions,
+    Wait,
     KnowledgeCheck,
+    BeforePractice,
 ]
