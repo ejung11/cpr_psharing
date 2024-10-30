@@ -24,19 +24,19 @@
 
     <div class="instructions">
 
-    <p>Your Earnings in Part 1 is <strong>{{ player.total_earning_part1 }} ECUs</strong>. </p>
-    <p>Your Earnings in Part 2 is <strong>{{ player.total_earning_part2 }} ECUs</strong>. </p>
-    <p>Your Earnings in Total is <strong>{{ player.total_earning }} ECUs</strong>. </p>
+    <p>Your Earnings in Part 1 is <strong>E$ {{ player.total_earning_part1 }}</strong>. </p>
+    <p>Your Earnings in Part 2 is <strong>E$ {{ player.total_earning_part2 }}</strong>. </p>
+    <p>Your Earnings in Total is <strong>E$ {{ player.total_earning }}</strong>. </p>
         <br>
-    <p>Total Earnings converted to U.S.D <strong>${{ player.total_cash }}</strong>. </p>
-    <p>For completing the post-survey, <strong>$5</strong>. </p>
+    <p>Total Earnings converted to U.S.D <strong>$ {{ player.total_cash }}</strong>. </p>
+    <p>For completing the post-survey, <strong>$ 3</strong>. </p>
         <br>
     <p>
         Here is your final payoff in U.S.D.
     </p>
 
     <p>
-        You earned <strong>${{ player.final_cash }}</strong>.  today.
+        You earned <strong>$ {{ player.final_cash }}</strong>.  today.
     </p>
     </div>
 </div>
