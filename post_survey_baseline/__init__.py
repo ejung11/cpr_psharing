@@ -34,9 +34,9 @@ class Group(BaseGroup):
 
 class Player(BasePlayer):
     #record payoffs
-    total_earning_part1 = models.IntegerField()
-    total_earning_part2 = models.IntegerField()
-    total_earning = models.IntegerField()
+    total_earning_part1 = models.FloatField()
+    total_earning_part2 = models.FloatField()
+    total_earning = models.FloatField()
     total_cash_b4round = models.FloatField()
     total_cash = models.FloatField()
     final_cash = models.FloatField()
@@ -280,7 +280,7 @@ def final_payoffs(p: Player):
     p.total_earning = p.participant.vars['totalEarnings']
     p.total_cash_b4round = p.participant.vars['totalCash']
     p.total_cash = (math.ceil(p.total_cash_b4round * 4))/4
-    p.final_cash = p.total_cash + 5
+    p.final_cash = p.total_cash + 3
 
 
 
