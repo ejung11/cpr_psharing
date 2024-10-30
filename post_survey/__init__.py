@@ -215,7 +215,7 @@ class Player(BasePlayer):
             [1, 'Part 1: No Sharing'],
             [2, 'Part 2: Sharing'],
         ],
-        widget=widgets.RadioSelectHorizontal,
+        widget=widgets.RadioSelect,
     )
 
     preference_reason = models.LongStringField(
