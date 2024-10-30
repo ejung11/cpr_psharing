@@ -124,7 +124,7 @@ class KnowledgeCheck(Page):
             kc2="Your group will remain the same throughout Part 1.",
             kc3="There are 10 rounds in the game.",
             kc4="You are given 25 efforts in every round to allocate between activities.",
-            kc5="The return for each effort in Activity F is 5 ECUs.",
+            kc5="The return for each effort in Activity F is E$ 5.",
             kc6="The return for Activity G is affected by the total effort allocated by the entire group.",
             kc7="Your final payoff will be the sum of your earnings from all rounds."
         )
