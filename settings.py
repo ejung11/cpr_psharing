@@ -172,7 +172,12 @@ dict(
         app_sequence=['post_survey'],
     ),
 
-
+    dict(
+        name='cpr_testapp',
+        display_name='cpr_testapp',
+        num_demo_participants=8,
+        app_sequence=['cpr_testapp'],
+    ),
 
 
 
