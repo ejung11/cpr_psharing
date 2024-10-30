@@ -209,6 +209,19 @@ class Player(BasePlayer):
         widget=widgets.RadioSelectHorizontal,
     )
 
+    preference = models.IntegerField(
+        label="Q8) Which setting do you prefer between Part 1 and Part 2?",
+        choices=[
+            [1, 'Part 1: No Sharing'],
+            [2, 'Part 2: Sharing'],
+        ],
+        widget=widgets.RadioSelectHorizontal,
+    )
+
+    preference_reason = models.LongStringField(
+        label="Q9)  Could you please explain why you prefer one over the other?",
+    )
+
 
     # Big 5 personality traits using Ten-Item Personality Inventory-(TIPI) Gosling et al. (2003)
     big5_extraversion = models.IntegerField(
@@ -310,6 +323,8 @@ class Decisions(Page):
         'tools_belief',
         'sharing_clear',
         'sharing_impact',
+        'preference',
+        'preference_reason'
     ]
 
 
