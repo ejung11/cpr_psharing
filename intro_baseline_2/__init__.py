@@ -27,22 +27,22 @@ class Player(BasePlayer):
     # KnowledgeCheck questions
 
     kc1 = models.StringField(
-        choices=[['False', 'A.  Remain the same'], ['True', 'B.  Mixed'],],
-        label='1. Will your group (Part 1) remain the same or be mixed in Part 2?',
+        choices=[['False', 'Remain the same'], ['True', 'Randomly reassigned'],],
+        label='1. Will your group (Part 1) remain the same or be randomly reassigned in Part 2?',
         widget=widgets.RadioSelect,
     )
 
     kc2 = models.StringField(
-        choices=[['False', 'A.  5'], ['True', 'B.  10'], ['False', 'C.  15'], ['False', 'D.  20'], ],
-        label='2. How many rounds will you play in the game?',
+        choices=[['False', '5'], ['True', '10'], ['False', '15'], ['False', '20'], ],
+        label='2. How many rounds will you play in Part 2?',
         widget=widgets.RadioSelect,
     )
 
     kc3 = models.StringField(
-        choices=[['True', 'A.  The sum of your earnings from both Part 1 and Part 2.'],
-                 ['False', 'B.  The earnings from Part 2.'],
-                 ['False', 'C.  A random Part will be selected, and only the earnings from that Part.'],
-                 ['False', 'D.  A fixed amount of money, regardless of your performance.'],
+        choices=[['True', 'The sum of your earnings from both Part 1 and Part 2.'],
+                 ['False', 'The earnings from Part 2.'],
+                 ['False', 'A random Part will be selected, and only the earnings from that Part.'],
+                 ['False', 'A fixed amount of money, regardless of your performance.'],
                  ],
         label='3. How will your final payoff be calculated?',
         widget=widgets.RadioSelect,

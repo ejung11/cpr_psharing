@@ -119,9 +119,9 @@ class Player(BasePlayer):
         label="Q7) Please indicate how many decision-making experiments you have participated in (including this experiments).",
         choices=[
             [1, 'This is the first time.'],
-            [2, 'More than 1 and less than 4 experiments'],
-            [3, 'More than 4 and less than 7 experiments.'],
-            [4, '8 or more experiments.'],
+            [2, '2 - 4'],
+            [3, '5 - 7'],
+            [4, '8 -'],
             [0, 'I prefer not to say.']
         ],
         widget=widgets.RadioSelect,
@@ -317,17 +317,18 @@ class Decisions(Page):
 class Big5(Page):
     form_model = 'player'
     form_fields = [
-        'big5_extraversion',
-        'big5_extraversion_r',
-        'big5_agreeableness',
-        'big5_agreeableness_r',
         'big5_conscientiousness',
-        'big5_conscientiousness_r',
-        'big5_emotional_stability',
-        'big5_emotional_stability_r',
-        'big5_openness',
         'big5_openness_r',
+        'big5_agreeableness',
+        'big5_emotional_stability',
+        'big5_extraversion_r',
+        'big5_openness',
+        'big5_conscientiousness_r',
+        'big5_agreeableness_r',
+        'big5_extraversion',
+        'big5_emotional_stability_r',
     ]
+
 
 class EndPage(Page):
     pass
