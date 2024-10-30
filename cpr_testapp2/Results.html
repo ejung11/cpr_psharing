@@ -1,0 +1,86 @@
+{% extends "global/Page.html" %}
+{% load otree %}
+
+{% block title %}
+    <strong>Results</strong>
+{% endblock %}
+
+{% block content %}
+    <h4><strong>Round {{group.round_number}}</strong></h4>
+
+    <table class="table-condensed" style="width:500px; margin-top:20px;">
+        <tr><td>In this round</td></tr>
+
+        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2"></td></tr>
+
+        <tr><td>You allocation to Activity G:</td><td>{{ player.effort_act_b }} efforts</td></tr>
+        <tr><td>Other's average allocation to Activity G:</td><td>{{ player.others_avg_effort_act_b }} efforts</td></tr>
+        <tr><td>Total group's allocation to Activity G:</td><td>{{ group.total_effort_act_b }} efforts</td></tr>
+
+        <!------------------------------------- line -------------------------------------------->
+
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Your earnings this round:</td><td>E$ {{ player.period_payoff_int }}</td></tr>
+
+        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2"></td></tr>
+        <tr><td colspan="2"></td></tr>
+
+        <!-- Indented Rows -->
+        <tr>
+            <td style="padding-left: 20px;">Earnings from Activity F:</td>
+            <td>E$ {{ player.period_earning_a_int }}</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 20px;">Earnings from Activity G:</td>
+            <td>E$ {{ player.period_earning_b_int }}</td>
+        </tr>
+        <tr>
+            <td style="padding-left: 20px;">Earnings from Group Share:</td>
+            <td>E$ {{ player.period_earning_group_int }}</td>
+        </tr>
+
+        <!------------------------------------- line -------------------------------------------->
+
+        <tr><td colspan="2"><hr/></td></tr>
+
+        <tr><td>Your accumulated earnings:</td><td>E$ {{ player.participant.vars.totalEarnings_b }}</td></tr>
+
+    </table>
+    <p></p>
+
+<!------------------------------------- Table -------------------------------------------->
+
+    {% if player.round_number != 1 %}
+{#        my comment goes here...#}
+        <div class="card-header mb-3 text-center" style="background:#DEF0FC; color:#2E7099">
+            <b>History Table</b>
+        </div>
+            <div class="row justify-content-center" style="max-height:40vh; overflow: scroll;">
+                <table class="table" style="width:500px">
+                    <tr>
+                        <th class="text-center">Round</th>
+                        <th class="text-center">Your allocation to Activity G</th>
+                        <th class="text-center">Your earning (Round)</th>
+                        <th class="text-center">Accumulated earnings</th>
+                    </tr>
+                    <tbody>
+                    {% for p in player.in_previous_rounds %}
+                        <tr>
+                            <td class="text-center my_style">{{p.round_number}}</td>
+                            <td class="text-center"> {{p.effort_act_b}} efforts</td>
+                            <td class="text-center"> E$ {{p.period_payoff_int}}</td>
+                            <td class="text-center"> E$ {{p.history_accumulated_earnings}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+             </div>
+    {% endif %}
+
+    {% next_button %}
+
+{% endblock %}

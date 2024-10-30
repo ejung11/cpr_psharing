@@ -179,6 +179,13 @@ dict(
         app_sequence=['cpr_testapp'],
     ),
 
+    dict(
+        name='cpr_testapp2',
+        display_name='cpr_testapp2',
+        num_demo_participants=8,
+        app_sequence=['cpr_testapp2'],
+    ),
+
 
 
 

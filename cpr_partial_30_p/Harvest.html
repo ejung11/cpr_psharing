@@ -117,19 +117,20 @@
 
                 let earningsActivityB_float = (1 - share) * activityBEffort *
                                         (ind_return_act_b - ext_cost * (guessEffort * (group_size - 1) + activityBEffort));
-                let earningsActivityB = Math.round(earningsActivityB_float);
+                let earningsActivityB = Number(earningsActivityB_float.toFixed(2));
 
                 let earningsGroup_float = (share * (guessEffort * (group_size - 1) + activityBEffort) *
                                     (ind_return_act_b - ext_cost * (guessEffort * (group_size - 1) + activityBEffort)))
                                     /group_size;
-                let earningsGroup = Math.round(earningsGroup_float);
+                let earningsGroup = Number(earningsGroup_float.toFixed(2));
 
                 document.getElementById('earnings_activity_A').textContent = earningsActivityA;
                 document.getElementById('earnings_activity_B').textContent = earningsActivityB;
                 document.getElementById('earnings_group_share').textContent = earningsGroup;
 
                 // Calculate and display total earnings
-                let totalEarnings = earningsActivityA + earningsActivityB + earningsGroup;
+                let totalEarnings_float = earningsActivityA + earningsActivityB + earningsGroup;
+                let totalEarnings = Number(totalEarnings_float.toFixed(2));
                 document.getElementById('total_earnings').textContent = totalEarnings;
             };
 

@@ -24,7 +24,7 @@ class Constants(BaseConstants):
     num_rounds = 10
     instructions_template = 'cpr_partial_60/rules.html'
     endowment = 25
-    conversion = 0.0033
+    conversion = 0.005
     share = 0.6
 
 
@@ -53,16 +53,16 @@ class Player(BasePlayer):
 
     others_effort_act_b = models.IntegerField()
     others_avg_effort_act_b = models.FloatField()
-    history_accumulated_earnings = models.IntegerField()
+    history_accumulated_earnings = models.FloatField()
     period_payoff = models.FloatField()
-    period_payoff_int = models.IntegerField()
+    period_payoff_int = models.FloatField()
 
     period_earning_a = models.FloatField()
-    period_earning_a_int = models.IntegerField()
+    period_earning_a_int = models.FloatField()
     period_earning_b = models.FloatField()
-    period_earning_b_int = models.IntegerField()
+    period_earning_b_int = models.FloatField()
     period_earning_group = models.FloatField()
-    period_earning_group_int = models.IntegerField()
+    period_earning_group_int = models.FloatField()
 
 
 #FUNCTIONS
@@ -80,6 +80,7 @@ def creating_session(subsession):
     #set individual var: total earnings for each participant
     for p in subsession.get_players():
         if subsession.round_number == 1:
+            p.participant.vars['totalEarnings_b_float'] = 0
             p.participant.vars['totalEarnings_b'] = 0
 
             # Comment out after testing
@@ -105,28 +106,27 @@ def set_payoffs(g: Group):
         earning_group = (Constants.share/Constants.players_per_group) * (group_extraction - group_externality_cost)
 
         p.period_earning_a = float(earning_act_a)
-        p.period_earning_a_int = round(p.period_earning_a)
+        p.period_earning_a_int = round(p.period_earning_a, 2)
 
         p.period_earning_b = float(earning_act_b)
-        p.period_earning_b_int = round(p.period_earning_b)
+        p.period_earning_b_int = round(p.period_earning_b, 2)
 
         p.period_earning_group = float(earning_group)
-        p.period_earning_group_int = round(p.period_earning_group)
+        p.period_earning_group_int = round(p.period_earning_group, 2)
 
         p.period_payoff = float( earning_act_a +
                                  earning_act_b +
                                  earning_group
                                 )
 
-        p.period_payoff_int = round(p.period_payoff)
+        p.period_payoff_int = round(p.period_payoff, 2)
 
-
-        p.participant.vars['totalEarnings_b'] += p.period_payoff_int
+        p.participant.vars['totalEarnings_b_float'] += p.period_payoff_int
+        p.participant.vars['totalEarnings_b'] = round(p.participant.vars['totalEarnings_b_float'], 2)
         p.history_accumulated_earnings = p.participant.vars['totalEarnings_b']
 
         p.participant.vars['totalEarnings'] = p.participant.vars['totalEarnings_a'] + p.participant.vars['totalEarnings_b']
         p.participant.vars['totalCash'] = round(p.participant.vars['totalEarnings'] * Constants.conversion, 2)
-        p.participant.vars['finalCash'] = p.participant.vars['totalCash'] + 5
 
         # Log effort of others
         p.others_effort_act_b = group_total_effort - individual_effort

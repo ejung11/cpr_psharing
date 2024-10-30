@@ -14,7 +14,7 @@ class Constants(BaseConstants):
     instructions_template = 'cpr_partial_30_p/rules.html'
     endowment = 25
     share = 0.3
-    conversion = 0.0033
+    conversion = 0.005
     fixed_others_effort_1 = 70
     fixed_others_effort_2 = 140
     fixed_others_effort_3 = 56
@@ -48,14 +48,14 @@ class Player(BasePlayer):
     others_avg_effort_act_b = models.FloatField()
 
     period_payoff = models.FloatField()
-    period_payoff_int = models.IntegerField()
+    period_payoff_int = models.FloatField()
 
     period_earning_a = models.FloatField()
-    period_earning_a_int = models.IntegerField()
+    period_earning_a_int = models.FloatField()
     period_earning_b = models.FloatField()
-    period_earning_b_int = models.IntegerField()
+    period_earning_b_int = models.FloatField()
     period_earning_group = models.FloatField()
-    period_earning_group_int = models.IntegerField()
+    period_earning_group_int = models.FloatField()
 
     group_total_effort = models.IntegerField()
 
@@ -91,19 +91,19 @@ def set_payoffs(player: Player):
     earning_group = (Constants.share / 8) * (group_extraction - group_externality_cost)
 
     player.period_earning_a = float(earning_act_a)
-    player.period_earning_a_int = round(player.period_earning_a)
+    player.period_earning_a_int = round(player.period_earning_a,2)
 
     player.period_earning_b = float(earning_act_b)
-    player.period_earning_b_int = round(player.period_earning_b)
+    player.period_earning_b_int = round(player.period_earning_b,2)
 
     player.period_earning_group = float(earning_group)
-    player.period_earning_group_int = round(player.period_earning_group)
+    player.period_earning_group_int = round(player.period_earning_group,2)
 
     player.period_payoff = float(earning_act_a +
                                 earning_act_b +
                                 earning_group
                                  )
-    player.period_payoff_int = round(player.period_payoff)
+    player.period_payoff_int = round(player.period_payoff,2)
 
 
 

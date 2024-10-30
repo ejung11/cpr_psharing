@@ -23,7 +23,7 @@ class Constants(BaseConstants):
     num_rounds = 10
     instructions_template = 'cpr_partial_baseline/rules.html'
     endowment = 25
-    conversion = 0.0033
+    conversion = 0.005
 
 
 class Subsession(BaseSubsession):
@@ -52,14 +52,14 @@ class Player(BasePlayer):
 
     others_effort_act_b = models.IntegerField()
     others_avg_effort_act_b = models.FloatField()
-    history_accumulated_earnings = models.IntegerField()
+    history_accumulated_earnings = models.FloatField()
     period_payoff = models.FloatField()
-    period_payoff_int = models.IntegerField()
+    period_payoff_int = models.FloatField()
 
     period_earning_a = models.FloatField()
-    period_earning_a_int = models.IntegerField()
+    period_earning_a_int = models.FloatField()
     period_earning_b = models.FloatField()
-    period_earning_b_int = models.IntegerField()
+    period_earning_b_int = models.FloatField()
 
 
 #FUNCTIONS
@@ -77,6 +77,7 @@ def creating_session(subsession):
     #set individual var: total earnings for each participant
     for p in subsession.get_players():
         if subsession.round_number == 1:
+            p.participant.vars['totalEarnings_a_float'] = 0
             p.participant.vars['totalEarnings_a'] = 0
 
 #Payoffs
@@ -97,17 +98,18 @@ def set_payoffs(g: Group):
 
 
         p.period_earning_a = float(earning_act_a)
-        p.period_earning_a_int = round(p.period_earning_a)
+        p.period_earning_a_int = round(p.period_earning_a, 2)
 
         p.period_earning_b = float(earning_act_b)
-        p.period_earning_b_int = round(p.period_earning_b)
+        p.period_earning_b_int = round(p.period_earning_b, 2)
 
         p.period_payoff = float(earning_act_a +
                                 earning_act_b
                                 )
-        p.period_payoff_int = round(p.period_payoff)
+        p.period_payoff_int = round(p.period_payoff, 2)
 
-        p.participant.vars['totalEarnings_a'] += p.period_payoff_int
+        p.participant.vars['totalEarnings_a_float'] += p.period_payoff_int
+        p.participant.vars['totalEarnings_a'] = round(p.participant.vars['totalEarnings_a_float'], 2)
         p.history_accumulated_earnings = p.participant.vars['totalEarnings_a']
         p.participant.vars['totalCash_a'] = round(p.participant.vars['totalEarnings_a'] * Constants.conversion, 2)
 
